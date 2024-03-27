@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tip Calculator</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+        }
+        input {
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Tip Calculator</h2>
+    <form id="tipForm">
+        <label for="billAmount">Bill Amount:</label><br>
+        <input type="number" id="billAmount" name="billAmount" required><br>
+        <label for="serviceQuality">Service Quality (1-5):</label><br>
+        <input type="number" id="serviceQuality" name="serviceQuality" min="1" max="5" required><br>
+        <label for="numberOfPeople">Number of People:</label><br>
+        <input type="number" id="numberOfPeople" name="numberOfPeople" min="1" required><br><br>
+        <button type="submit">Calculate Tip</button>
+    </form>
+    <div id="tipResult"></div>
+</div>
+
+<script>
+    document.getElementById("tipForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        calculateTip();
+    });
+
+    function calculateTip() {
+        var billAmount = parseFloat(document.getElementById("billAmount").value);
+        var serviceQuality = parseInt(document.getElementById("serviceQuality").value);
+        var numberOfPeople = parseInt(document.getElementById("numberOfPeople").value);
+
+        var tipPerPerson = (billAmount * (serviceQuality / 100)) / numberOfPeople;
+
+        document.getElementById("tipResult").innerHTML = "Tip per person: $" + tipPerPerson.toFixed(2);
+    }
+</script>
+
+</body>
+</html>
